@@ -2,19 +2,25 @@
 <html>
 <head>
     <title>Countdown</title>
+    <style>
+        body { background-color: #d1e7ff; text-align: center; font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); width: 50%; }
+    </style>
 </head>
 <body>
-    <h1>Countdown to Our Next Meeting 📅</h1>
-    <p>Time left: <span id="countdown"></span></p>
-    <script>
-        var eventDate = new Date("March 17, 2025 00:00:00").getTime();
-        var x = setInterval(function() {
-            var now = new Date().getTime();
-            var distance = eventDate - now;
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById("countdown").innerHTML = days + " days left!";
-        }, 1000);
-    </script>
-    <button onclick="location.href='index.html'">Back to Home</button>
+    <div class="container">
+        <h1>Countdown to Our Next Meeting 📅</h1>
+        <p>Time left: <span id="countdown"></span></p>
+        <script>
+            var eventDate = new Date("March 17, 2025 00:00:00").getTime();
+            var x = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = eventDate - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("countdown").innerHTML = days + " days left!";
+            }, 1000);
+        </script>
+        <button onclick="location.href='index.html'">Back to Home</button>
+    </div>
 </body>
 </html>
