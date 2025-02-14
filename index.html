@@ -80,18 +80,26 @@
     </style>
 </head>
 <body>
-    <iframe src="music.html" width="200" height="80" style="border: none; position: fixed; bottom: 10px; right: 10px;"></iframe>
+    <audio id="background-music" loop>
+        <source src="Valentine's Day.mp3" type="audio/mpeg">
+    </audio>
     <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.innerHTML = '❤️';
-            heart.classList.add('heart', 'bounce');
-            document.body.appendChild(heart);
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
-            setTimeout(() => heart.remove(), 5000);
-        }
-        setInterval(createHeart, 500);
+        document.addEventListener("DOMContentLoaded", function() {
+            let music = document.getElementById("background-music");
+            if (!sessionStorage.getItem("musicPlaying")) {
+                music.play().catch(() => {
+                    console.log("Autoplay blocked. Click to play.");
+                });
+                sessionStorage.setItem("musicPlaying", "true");
+            }
+            document.addEventListener("visibilitychange", function() {
+                if (document.hidden) {
+                    music.pause();
+                } else {
+                    music.play();
+                }
+            });
+        });
     </script>
     <div class="container">
         <h1>Happy Valentine's Day, My Love! 💖</h1>
