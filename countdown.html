@@ -8,27 +8,6 @@
     </style>
 </head>
 <body>
-     <audio id="background-music" loop>
-        <source src="Valentine's Day.mp3" type="audio/mpeg">
-    </audio>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let music = document.getElementById("background-music");
-            if (!sessionStorage.getItem("musicPlaying")) {
-                music.play().catch(() => {
-                    console.log("Autoplay blocked. Click to play.");
-                });
-                sessionStorage.setItem("musicPlaying", "true");
-            }
-            document.addEventListener("visibilitychange", function() {
-                if (document.hidden) {
-                    music.pause();
-                } else {
-                    music.play();
-                }
-            });
-        });
-    </script>
     <div class="container">
         <h1>Countdown to Our Next Meeting 📅</h1>
         <p>Time left: <span id="countdown"></span></p>
