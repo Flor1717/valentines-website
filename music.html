@@ -3,112 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day - Home</title>
+    <title>Music Player</title>
     <style>
-        body {
-            text-align: center;
-            background-color: #ffe6f2;
-            font-family: 'Arial', sans-serif;
+        body { margin: 0; background: transparent; }
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff4081;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 50%;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-        h1 {
-            color: #ff4081;
-            font-size: 3rem;
-            animation: textGlow 2s infinite alternate;
-        }
-        p {
-            font-size: 1.5rem;
-            color: #d63384;
-            animation: fadeIn 2s ease-in-out;
         }
         button {
-            background: #ff4081;
-            color: white;
+            background: white;
+            color: #ff4081;
             border: none;
-            padding: 10px 20px;
+            padding: 5px 10px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
-            margin: 10px;
-            transition: background 0.3s, transform 0.2s;
-            animation: fadeIn 2s ease-in-out;
-        }
-        button:hover {
-            background: #d63384;
-            transform: scale(1.1);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes textGlow {
-            from { text-shadow: 0 0 10px #ff4081; }
-            to { text-shadow: 0 0 20px #ff99cc; }
-        }
-        .heart {
-            position: absolute;
-            color: red;
-            font-size: 24px;
-            opacity: 0.8;
-            animation: float 5s linear infinite;
-        }
-        @keyframes float {
-            from { transform: translateY(0); opacity: 0.8; }
-            to { transform: translateY(-100vh); opacity: 0; }
-        }
-        .bounce {
-            animation: bounce 1s infinite alternate;
-        }
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
+            margin-left: 10px;
         }
     </style>
 </head>
 <body>
-    <audio id="background-music" loop>
-        <source src="Valentine's Day.mp3" type="audio/mpeg">
-    </audio>
+    <div class="music-player">
+        <audio id="background-music" loop>
+            <source src="Valentine's Day.mp3" type="audio/mpeg">
+        </audio>
+        <button onclick="toggleMusic()">🎵 Play/Pause</button>
+    </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let music = document.getElementById("background-music");
-            if (!sessionStorage.getItem("musicPlaying")) {
-                music.play().catch(() => {
-                    console.log("Autoplay blocked. Click to play.");
-                });
+        const music = document.getElementById("background-music");
+        
+        // Check if music should resume from the last time
+        if (sessionStorage.getItem("musicTime")) {
+            music.currentTime = sessionStorage.getItem("musicTime");
+        }
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
                 sessionStorage.setItem("musicPlaying", "true");
+            } else {
+                music.pause();
+                sessionStorage.setItem("musicPlaying", "false");
             }
-            document.addEventListener("visibilitychange", function() {
-                if (document.hidden) {
-                    music.pause();
-                } else {
-                    music.play();
-                }
-            });
+        }
+
+        // Save current play time before page unload
+        window.addEventListener("beforeunload", function() {
+            sessionStorage.setItem("musicTime", music.currentTime);
+        });
+
+        // Autoplay if allowed
+        document.addEventListener("DOMContentLoaded", function() {
+            if (sessionStorage.getItem("musicPlaying") === "true") {
+                music.play().catch(() => console.log("Autoplay blocked."));
+            }
         });
     </script>
-    <div class="container">
-        <h1>Happy Valentine's Day, My Love! 💖</h1>
-        <p>Choose where you want to go:</p>
-        <button onclick="location.href='love-letter.html'">Love Letter 💌</button>
-        <button onclick="location.href='playlist.html'">Love Song Playlist 🎵</button>
-        <button onclick="location.href='reasons.html'">Reasons Why I Love You 💬</button>
-        <button onclick="location.href='countdown.html'">Countdown to Our Next Meeting 📅</button>
-        <button onclick="location.href='quiz.html'">Fun Quiz/Game 🎲</button>
-    </div>
 </body>
 </html>
