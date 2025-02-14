@@ -15,7 +15,6 @@
             height: 100vh;
             margin: 0;
             overflow: hidden;
-            flex-direction: column;
         }
         .container {
             background: white;
@@ -25,12 +24,6 @@
             text-align: center;
             width: 50%;
             animation: fadeIn 1.5s ease-in-out;
-        }
-        iframe {
-            width: 90%;
-            height: 500px;
-            border: none;
-            margin-top: 20px;
         }
         h1 {
             color: #ff4081;
@@ -66,29 +59,59 @@
             from { text-shadow: 0 0 10px #ff4081; }
             to { text-shadow: 0 0 20px #ff99cc; }
         }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            opacity: 0.8;
+            animation: float 5s linear infinite;
+        }
+        @keyframes float {
+            from { transform: translateY(0); opacity: 0.8; }
+            to { transform: translateY(-100vh); opacity: 0; }
+        }
+        .bounce {
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
     </style>
 </head>
 <body>
-    <audio id="bg-music" autoplay loop>
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart', 'bounce');
+            document.body.appendChild(heart);
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 500);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let audio = document.querySelector("audio");
+            audio.play().catch(() => {
+                console.log("Autoplay blocked. Click to play.");
+            });
+        });
+    </script>
+    <audio autoplay loop>
       <source src="Valentine's Day.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <button onclick="document.getElementById('bg-music').play()">Play Music 🎶</button>
+    <button onclick="document.querySelector('audio').play()">Play Music 🎶</button>
     <div class="container">
         <h1>Happy Valentine's Day, My Love! 💖</h1>
         <p>Choose where you want to go:</p>
-        <button onclick="loadPage('love-letter.html')">Love Letter 💌</button>
-        <button onclick="loadPage('playlist.html')">Love Song Playlist 🎵</button>
-        <button onclick="loadPage('reasons.html')">Reasons Why I Love You 💬</button>
-        <button onclick="loadPage('countdown.html')">Countdown to Our Next Meeting 📅</button>
-        <button onclick="loadPage('quiz.html')">Fun Quiz/Game 🎲</button>
+        <button onclick="location.href='love-letter.html'">Love Letter 💌</button>
+        <button onclick="location.href='playlist.html'">Love Song Playlist 🎵</button>
+        <button onclick="location.href='reasons.html'">Reasons Why I Love You 💬</button>
+        <button onclick="location.href='countdown.html'">Countdown to Our Next Meeting 📅</button>
+        <button onclick="location.href='quiz.html'">Fun Quiz/Game 🎲</button>
     </div>
-    <iframe id="content-frame" src="love-letter.html"></iframe>
-
-    <script>
-        function loadPage(page) {
-            document.getElementById('content-frame').src = page;
-        }
-    </script>
 </body>
 </html>
