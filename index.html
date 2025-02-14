@@ -92,13 +92,12 @@
                 });
                 sessionStorage.setItem("musicPlaying", "true");
             }
-            document.addEventListener("visibilitychange", function() {
-                if (document.hidden) {
-                    music.pause();
-                } else {
-                    music.play();
-                }
+            window.addEventListener("beforeunload", function() {
+                sessionStorage.setItem("musicTime", music.currentTime);
             });
+            if (sessionStorage.getItem("musicTime")) {
+                music.currentTime = sessionStorage.getItem("musicTime");
+            }
         });
     </script>
     <div class="container">
