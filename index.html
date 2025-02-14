@@ -80,6 +80,7 @@
     </style>
 </head>
 <body>
+    <iframe src="music.html" width="200" height="80" style="border: none; position: fixed; bottom: 10px; right: 10px;"></iframe>
     <script>
         function createHeart() {
             const heart = document.createElement('div');
@@ -91,19 +92,7 @@
             setTimeout(() => heart.remove(), 5000);
         }
         setInterval(createHeart, 500);
-
-        document.addEventListener('DOMContentLoaded', function() {
-            let audio = document.querySelector("audio");
-            audio.play().catch(() => {
-                console.log("Autoplay blocked. Click to play.");
-            });
-        });
     </script>
-    <audio autoplay loop>
-      <source src="Valentine's Day.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-    <button onclick="document.querySelector('audio').play()">Play Music 🎶</button>
     <div class="container">
         <h1>Happy Valentine's Day, My Love! 💖</h1>
         <p>Choose where you want to go:</p>
