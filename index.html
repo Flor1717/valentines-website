@@ -28,10 +28,12 @@
         h1 {
             color: #ff4081;
             font-size: 3rem;
+            animation: textGlow 2s infinite alternate;
         }
         p {
             font-size: 1.5rem;
             color: #d63384;
+            animation: fadeIn 2s ease-in-out;
         }
         button {
             background: #ff4081;
@@ -42,14 +44,20 @@
             cursor: pointer;
             font-size: 1rem;
             margin: 10px;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
+            animation: fadeIn 2s ease-in-out;
         }
         button:hover {
             background: #d63384;
+            transform: scale(1.1);
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes textGlow {
+            from { text-shadow: 0 0 10px #ff4081; }
+            to { text-shadow: 0 0 20px #ff99cc; }
         }
         .heart {
             position: absolute;
@@ -62,6 +70,13 @@
             from { transform: translateY(0); opacity: 0.8; }
             to { transform: translateY(-100vh); opacity: 0; }
         }
+        .bounce {
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
     </style>
 </head>
 <body>
@@ -69,7 +84,7 @@
         function createHeart() {
             const heart = document.createElement('div');
             heart.innerHTML = '❤️';
-            heart.classList.add('heart');
+            heart.classList.add('heart', 'bounce');
             document.body.appendChild(heart);
             heart.style.left = Math.random() * 100 + "vw";
             heart.style.animationDuration = Math.random() * 2 + 3 + "s";
@@ -77,6 +92,10 @@
         }
         setInterval(createHeart, 500);
     </script>
+    <audio autoplay loop>
+      <source src="Valentine's Day.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
     <div class="container">
         <h1>Happy Valentine's Day, My Love! 💖</h1>
         <p>Choose where you want to go:</p>
