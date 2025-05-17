@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A Sweet Surprise</title>
+    <style>
+        body {
+            background-color: #ffe6f2;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 {
+            color: #ff4081;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            animation: textGlow 2s infinite alternate;
+        }
+        #revealButton {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        #revealButton:hover {
+            background: #d63384;
+        }
+        #surpriseMessage {
+            margin-top: 30px;
+            font-size: 1.4rem;
+            color: #d63384;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        @keyframes textGlow {
+            from { text-shadow: 0 0 10px #ff4081; }
+            to { text-shadow: 0 0 20px #ff99cc; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>A Sweet Surprise 💖</h1>
+        <button id="revealButton">Click here to reveal your surprise!</button>
+        <p id="surpriseMessage">
+            One day, we won’t need to count days anymore...<br>
+            Because I’ll be beside you, always. 💞
+        </p>
+        <button onclick="location.href='index.html'" style="margin-top: 40px;">Back to Home</button>
+    </div>
+
+    <iframe src="music.html" width="200" height="80"
+        style="border: none; position: fixed; bottom: 10px; right: 10px;"></iframe>
+
+    <script>
+        const btn = document.getElementById('revealButton');
+        const msg = document.getElementById('surpriseMessage');
+
+        btn.addEventListener('click', () => {
+            msg.style.opacity = 1;
+            btn.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
